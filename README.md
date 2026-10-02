@@ -1,3 +1,6 @@
+# THIS IS FULLY VIBE-CODED DONT USE THIS FOR ANYTHING ATLEAST SEMI SECURE/IMPORTANT
+
+
 # Phone Mic Router
 
 Use an Android phone, or any device with a modern web browser, as a microphone on Linux.
