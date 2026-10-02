@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Phone Mic Router
+GenericName=Phone Microphone
+Comment=Use phones and browsers as microphones (PipeWire virtual source)
+Exec=@LAUNCHER@
+Icon=@ICON@
+Terminal=false
+Categories=AudioVideo;Audio;Utility;
+Keywords=microphone;phone;android;pipewire;discord;obs;
+StartupWMClass=phone-mic-router

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16181d">
+<title>Phone Microphone</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icon.svg" alt="" class="logo">
+    <div>
+      <h1>Phone Microphone</h1>
+      <p class="sub" id="serverName">Phone Mic Router</p>
+    </div>
+  </header>
+
+  <section id="secureWarning" class="card warn" hidden>
+    <h2>Microphone blocked on this address</h2>
+    <p>Browsers only allow the microphone on <b>https://</b> pages or on <b>localhost</b> (USB). This page was opened over plain HTTP.</p>
+    <p id="httpsHint"></p>
+    <a id="httpsLink" class="button secondary" href="#" hidden>Open the secure (HTTPS) page</a>
+    <p class="small">On the HTTPS page your browser warns about the certificate the first time, because it was created by your own computer. Tap <i>Advanced</i>, then <i>Proceed</i>. To skip the warning permanently, install the <a href="/ca.crt">local certificate</a> on the phone.</p>
+  </section>
+
+  <section id="unsupported" class="card error" hidden>
+    <h2>Browser not supported</h2>
+    <p id="unsupportedText">This browser does not support the audio APIs needed (getUserMedia and Web Audio). Use a current Chrome, Firefox, Edge or Samsung Internet.</p>
+  </section>
+
+  <section class="card">
+    <div class="status-row">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText" class="status">Disconnected</span>
+    </div>
+    <p id="statusDetail" class="small detail"></p>
+    <button id="startBtn" class="button primary big">Start Microphone</button>
+    <button id="muteBtn" class="button secondary" hidden>Mute</button>
+  </section>
+
+  <section class="card" id="pairCard" hidden>
+    <label for="codeInput">Pairing code</label>
+    <input id="codeInput" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code shown on the computer" maxlength="8">
+    <p class="small">The code is shown in the Phone Mic Router window on your computer under <i>Network</i>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Input level</h2>
+    <div class="meter"><div class="meter-fill" id="meterFill"></div><div class="meter-peak" id="meterPeak"></div></div>
+    <div class="meter-label"><span id="levelText">– dBFS</span><span id="clipText" class="clip" hidden>CLIP</span></div>
+  </section>
+
+  <section class="card">
+    <h2>Details</h2>
+    <dl>
+      <dt>Microphone</dt><dd><select id="micSelect"><option value="">Default microphone</option></select></dd>
+      <dt>Sample rate</dt><dd id="rateText">–</dd>
+      <dt>Channels</dt><dd id="channelsText">Mono</dd>
+      <dt>Connection</dt><dd id="connText">–</dd>
+      <dt>Sending to</dt><dd id="targetText">–</dd>
+      <dt>Latency</dt><dd id="latencyText" title="Approximate: browser and device timing cannot be measured exactly">–</dd>
+    </dl>
+  </section>
+
+  <details class="card">
+    <summary>Settings</summary>
+    <label for="nameInput">Device name</label>
+    <input id="nameInput" maxlength="60" placeholder="e.g. Pixel 8">
+    <label class="check"><input type="checkbox" id="optNoise"> Noise suppression</label>
+    <label class="check"><input type="checkbox" id="optEcho"> Echo cancellation</label>
+    <label class="check"><input type="checkbox" id="optAgc"> Automatic gain control</label>
+    <label class="check"><input type="checkbox" id="optWake" checked> Keep screen on while streaming</label>
+    <p class="small">Changes apply the next time the microphone starts. Keep this page open in the foreground: phones may pause the microphone when the screen locks.</p>
+  </details>
+
+  <footer class="small">All audio stays on your local network. Nothing is sent to the internet.</footer>
+</main>
+</body>
+</html>

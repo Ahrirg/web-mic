@@ -1,0 +1,6 @@
+# Runtime dependencies (all ship pre-built wheels; nothing is compiled)
+PySide6>=6.5
+aiohttp>=3.9
+numpy>=1.24
+cryptography>=41
+segno>=1.5

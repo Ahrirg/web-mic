@@ -1,0 +1,26 @@
+# Headless systemd *user* service (no GUI). Install with:
+#   mkdir -p ~/.config/systemd/user
+#   cp packaging/phone-mic-router.service ~/.config/systemd/user/
+#   # edit ExecStart if you did not use scripts/install.sh
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now phone-mic-router
+# The pairing code is printed in: journalctl --user -u phone-mic-router
+# (or set "auth_enabled": false in ~/.config/phone-mic-router/config.json on a trusted LAN).
+# Do not run the GUI and this service at the same time; only one instance can run.
+
+[Unit]
+Description=Phone Mic Router (phone browser microphones -> PipeWire virtual source)
+After=pipewire.service pipewire-pulse.service wireplumber.service
+Wants=pipewire.service pipewire-pulse.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/phone-mic-router --no-gui
+Restart=on-failure
+RestartSec=3
+# The virtual microphone helpers are children of this process and vanish with it.
+KillMode=control-group
+TimeoutStopSec=10
+
+[Install]
+WantedBy=default.target
